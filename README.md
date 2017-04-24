@@ -1,12 +1,19 @@
 # VCFtoTree v2.0.0
 Updates:
-- parse chosen populations.
+- Now users can choose the populations that they are interested, or "ALL" to include all the populations.
+- Added the new Neanderthal [Vindija] to the GUI. 
+
+[Vindija]:http://cdna.eva.mpg.de/neandertal/Vindija/VCF/Vindija33.19/
+
+#### APP download site:
+https://www.dropbox.com/sh/sewjxmh9207fp89/AAASfUGqMBtd2_HO3CR7XA3ha?dl=0
 
 
 
 
 # VCFtoTree v1.0.0
 Build phylogeny from [1000 Genomes] Phase 3 VCF file for 2504 individuals, also including ancient ([Neanderthal], [Denisovan]) and primate genomes.
+
 [1000 Genomes]:http://www.1000genomes.org
 [Neanderthal]:http://www.eva.mpg.de/neandertal/index.html
 [Denisovan]:http://www.eva.mpg.de/denisova/index.html

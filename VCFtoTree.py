@@ -61,10 +61,11 @@ class Frames:
         self.DropDown.yview()
 
         self.DropDown.insert(1, 'Human')
-        self.DropDown.insert(2, 'Neandertal')
-        self.DropDown.insert(3, 'Denisova')
-        self.DropDown.insert(4, 'Chimp')
-        self.DropDown.insert(5, 'Rhesus macaque')
+        self.DropDown.insert(2, 'Neanderthal')
+        self.DropDown.insert(3, 'Vindija')
+        self.DropDown.insert(4, 'Denisova')
+        self.DropDown.insert(5, 'Chimp')
+        self.DropDown.insert(6, 'Rhesus macaque')
 
         self.Next = Button(speciesSelection, text = "Next", font = ('Times', 12), fg = 'brown', command = self.oneSet, borderwidth = 4)
         self.Next.pack(side = RIGHT, pady = 45)
@@ -103,6 +104,7 @@ class Frames:
         self.DropDown2.insert(24, 'GBR')
         self.DropDown2.insert(25, 'KHV')
         self.DropDown2.insert(26, 'PJL')
+        self.DropDown2.insert(27, 'IBS')
 
         self.Next = Button(populationSelection, text = "Next", font = ('Times', 12), fg = 'brown', command = self.oneSet, borderwidth = 4)
         self.Previous = Button(populationSelection, text = "Back", font = ('Times', 12), fg = 'brown', command = self.previousFrame, borderwidth = 4)

@@ -55,13 +55,14 @@ then
 ##Else if other species selected
 else
 	touch ALI_altainean.fa
+	touch ALI_vindijanean.fa
 	touch ALI_den.fa
 	touch ALI_panTro4Ref_hg19.fa
 	touch ALI_rheMac3Ref_hg19.fa
 	
 
 ##If neadertal in array
-	if [[ $specieslist == *"Neandertal"* ]]
+	if [[ $specieslist == *"Neanderthal"* ]]
 	then
 		## prepare Altai neanderthal vcf files
 		/usr/local/bin/wget http://cdna.eva.mpg.de/neandertal/altai/AltaiNeandertal/VCF/AltaiNea.hg19_1000g.$chr.mod.vcf.gz
@@ -72,6 +73,20 @@ else
 		
 		python Code/vcf2fasta_AltaiNean_Den_rmhetero_erica.py $vcffile_altainean $ref $start $end ALI_altainean.fa Indels_Altai.txt
 	fi	
+
+##If Vindija neanderthal in array
+    if [[ $specieslist == *"Vindija"* ]]
+    then
+        ## prepare Vindija vcf file
+        /usr/local/bin/wget http://cdna.eva.mpg.de/neandertal/Vindija/VCF/Vindija33.19/chr$chr\_mq25_mapab100.vcf.gz
+        /usr/local/bin/tabix -h -f chr$chr\_mq25_mapab100.vcf.gz
+        /usr/local/bin/tabix -h -f chr$chr\_mq25_mapab100.vcf.gz $chr:$start-$end >  Vindijanean_chr$chr.START$start.END$end.vcf
+
+        vcffile_vindijanean=Vindijanean_chr$chr.START$start.END$end.vcf
+
+        python Code/vcf2fasta_AltaiNean_Den_rmhetero_erica.py $vcffile_vindijanean $ref $start $end ALI_vindijanean.fa Indels_Vindija.txt
+    fi
+
 
 ##If denisova in array
 	if [[ $specieslist == *"Denisova"* ]] 
@@ -104,8 +119,9 @@ else
 
 	##May cause error if not found
 	# add gaps from log.txt
-	cat ALI_altainean.fa ALI_den.fa ALI_panTro4Ref_hg19.fa ALI_rheMac3Ref_hg19.fa >> ALI_temp.fa
+	cat ALI_altainean.fa ALI_vindijanean.fa ALI_den.fa ALI_panTro4Ref_hg19.fa ALI_rheMac3Ref_hg19.fa >> ALI_temp.fa
 	#rm ALI_altainean.fa
+	#rm ALI_vindijanean.fa
 	#rm ALI_den.fa
 	#rm ALI_panTro4Ref_hg19.fa
 	#rm ALI_rheMac3Ref_hg19.fa
@@ -123,7 +139,8 @@ else
 	Code/raxmlHPC-PTHREADS-SSE3 -T 2 -n YourRegion -s ALI_final.phy -mGTRGAMMA -p 235 -N 2
 
 	mv RAxML_bestTree.YourRegion RAxML_bestTree.YourRegion.newick
-
+    mv Indels_* ../../../VCFtoTree_Output/
+    mv log.txt ../../../VCFtoTree_Output/
 	mv RAxML_* ../../../VCFtoTree_Output/
 	mv AL* ../../../VCFtoTree_Output/
 	mv error* ../../../VCFtoTree_Output/
@@ -131,10 +148,17 @@ else
 	mv chr* ../../../VCFtoTree_Output/
 	mv *.vcf ../../../VCFtoTree_Output/
 	mv *.vcf.gz.tbi ../../../VCFtoTree_Output/
+	mv Code/
 
 	open ../../../VCFtoTree_Output/
 	echo "All done, Erica is a genius."
 fi
+
+
+
+
+
+
 
 
 
